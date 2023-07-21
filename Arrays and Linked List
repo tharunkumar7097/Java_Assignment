@@ -1,0 +1,25 @@
+1) 
+import java.util.*;
+public class practice{
+    public static void main(String[] args){
+        int product=1;
+        int numbers[]={1,4,6,9,5,10};
+        System.out.println("Enter an array:"+Arrays.toString(numbers));
+        for(int i=0;i<numbers.length;i++){
+            product*=numbers[i];
+            numbers[i]=product;
+        }
+        System.out.println("The cummulative product of the array is:");
+        for(int j:numbers){
+            System.out.print(" "+j);
+        }
+    
+    }
+}
+
+
+output:-
+Enter an array:[1, 4, 6, 9, 5, 10]
+The cummulative product of the array is:
+ 1 4 24 216 1080 10800
+-----------------------------------------------------------------
