@@ -23,3 +23,369 @@ Enter an array:[1, 4, 6, 9, 5, 10]
 The cummulative product of the array is:
  1 4 24 216 1080 10800
 -----------------------------------------------------------------
+
+2)
+
+
+import java.util.*;
+class MissingNumbers{
+static void Numbers(int arr[],int N)
+{
+	int diff = arr[0] - 0;
+	for(int i = 0; i < N; i++)
+	{
+		if (arr[i] - i != diff)
+		{
+			while (diff < arr[i] - i)
+			{
+				System.out.print((i + diff) + " ");
+				diff++;
+			}
+		}
+	}
+}
+
+public static void main (String[] args)
+{
+	int arr[] = { 1,2,4,5,9,12 };
+	
+	int N = arr.length;
+	Numbers(arr, N);
+}
+}
+
+
+output:-
+3 6 7 8 10 11
+
+----------------------------------------------------------------------
+3)
+
+-------------------------------------------------------------------------
+4)
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    int numberOfElements = sc.nextInt();
+    int[] array = new int[numberOfElements];
+
+    for (int i = 0; i < numberOfElements; i++) {
+        array[i] = sc.nextInt();
+    }
+
+    sc.close();
+
+    int subArrayLength = 1;
+    int subArraySum = 0;
+    int negativeSubArrayCount = 0;
+
+    for (int i = 0; i < numberOfElements; i++) {
+
+        for (int j = 0; j <= numberOfElements - subArrayLength; j++) {
+
+            for (int k = j; k < j + subArrayLength; k++) {
+                subArraySum += array[k];
+            }
+
+            if (subArraySum < 0) {
+                negativeSubArrayCount++;
+            }
+
+            subArraySum = 0;
+
+        }
+
+            subArrayLength++;
+    }
+
+    System.out.println(negativeSubArrayCount);
+
+}
+    }
+
+---------------------------------------------------------------------
+
+5)
+
+--------------------------------------------------
+6)
+
+----------------------------------------------------------------
+7)
+
+class Solution {
+    public String longestPalindrome(String s) {
+
+        String ans = "";
+        
+        for(int i=0; i<s.length(); i++){
+             int low = i, high = i;
+             while(low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+                 if(ans.length() < high-low+1){
+                     ans = s.substring(low, high+1);
+                 }
+                low--;
+                high++;
+             }
+             low = i;
+             high = i+1;
+            while(low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+                if(ans.length() < high-low+1){
+                    ans = s.substring(low, high+1);
+                }
+                low--;
+                high++;
+            }
+        }
+        return ans;
+        
+    }
+}
+
+--------------------------------------------------------------------------------------
+8)
+
+import java.util.*;
+class Solution{
+	
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		while (sc.hasNext()) {
+			String input=sc.next();
+            //Complete the code
+            
+            Stack<Character> st = new Stack<>();
+            boolean flag = true;
+            
+            for(int i=0; i<input.length(); i++)
+            {
+                if(input.charAt(i) == '(' || input.charAt(i) == '{' || input.charAt(i) == '[')
+                {
+                    st.push(input.charAt(i));
+                }
+                else
+                {
+                    if(input.charAt(i) == ')' && !st.isEmpty() && st.peek() == '(')
+                    {
+                        st.pop();
+                    }
+                    else if(input.charAt(i) == '}' && !st.isEmpty() && st.peek() == '{')
+                    {
+                        st.pop();
+                    }
+                    else if(input.charAt(i) == ']' && !st.isEmpty() && st.peek() == '[')
+                    {
+                        st.pop();
+                    }
+                    else
+                    {
+                        flag = false;
+                    }
+                }
+            }
+            
+            if(input.length() == 0)
+            {
+                System.out.println("true");
+            }
+            else if(flag == true && st.size() == 0)
+            {
+                System.out.println("true");
+            }
+            else
+            {
+                System.out.println("false");
+            }
+        }
+    }
+}
+
+
+----------------------------------------------------------------------
+9)
+
+    import java.util.*;
+    public class test {
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            Deque<Integer> deque = new ArrayDeque<>();
+            HashSet<Integer> hs = new HashSet<>();
+            int n = in.nextInt();
+            int m = in.nextInt();
+            int c = 0 ;
+            int[] nums = new int[n];
+            for (int i = 0; i < n; i++) {
+                nums[i] = in.nextInt();
+            }
+            
+            for(int i = 0 ; i < n ; i++){
+                deque.add(nums[i]);
+                if(deque.size()>m){
+                    int removed = deque.removeFirst();
+                    if(!deque.contains(removed)){
+                        hs.remove(removed);
+                    }
+                }
+                hs.add(nums[i]);
+                if(hs.size()>c){
+                    c = hs.size();
+                }
+            }
+            System.out.println(c);
+        }
+    }
+    
+-------------------------------------------------------------------------------------------------
+
+10)
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.*;
+/*
+ * Create the Student and Priorities classes here.
+ */
+ class Student {
+    private final int id;
+    private final String name;
+    private final double cgpa;
+
+    public Student(int id, String name, double cgpa) {
+        this.id = id;
+        this.name = name;
+        this.cgpa = cgpa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getCgpa() {
+        return cgpa;
+    }
+}
+
+class Priorities {
+    public List<Student> getStudents(List<String> events) {
+        PriorityQueue<Student> queue = new PriorityQueue<>(
+            Comparator.comparing(Student::getCgpa).reversed()
+                .thenComparing(Student::getName)
+                .thenComparing(Student::getId)
+        );
+        for (String event : events) {
+            String[] parts = event.split("\\s+");
+            if (parts[0].equals("ENTER")) {
+                String name = parts[1];
+                double cgpa = Double.parseDouble(parts[2]);
+                int id = Integer.parseInt(parts[3]);
+                Student student = new Student(id, name, cgpa);
+                queue.add(student);
+            } else if (parts[0].equals("SERVED")) {
+                queue.poll();
+            }
+        }
+        List<Student> students = new ArrayList<>(queue);
+        students.sort(Comparator.comparing(Student::getCgpa).reversed()
+            .thenComparing(Student::getName)
+            .thenComparing(Student::getId)
+        );
+        return students;
+    }
+}
+
+
+public class Solution {
+    private final static Scanner scan = new Scanner(System.in);
+    private final static Priorities priorities = new Priorities();
+    
+    public static void main(String[] args) {
+        int totalEvents = Integer.parseInt(scan.nextLine());    
+        List<String> events = new ArrayList<>();
+        
+        while (totalEvents-- != 0) {
+            String event = scan.nextLine();
+            events.add(event);
+        }
+        
+        List<Student> students = priorities.getStudents(events);
+        
+        if (students.isEmpty()) {
+            System.out.println("EMPTY");
+        } else {
+            for (Student st: students) {
+                System.out.println(st.getName());
+            }
+        }
+    }
+}
+
+-------------------------------------------------------------------------------------------------------
+11)
+
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+
+         if(head == null || head.next == null)   
+        return head;
+        
+        ListNode temp = new ListNode(0);
+        temp.next = head;
+        ListNode curr = temp;
+        
+        while(curr.next != null && curr.next.next != null){
+            ListNode n1 = curr.next;
+            ListNode n2 = curr.next.next;
+            
+            n1.next = n2.next;             
+            curr.next = n2;                
+            curr.next.next = n1;           
+            curr = curr.next.next;    
+    }
+ 
+    return temp.next;
+        
+    }
+}
+
+---------------------------------------------------------------------------------------------------
+12)
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+    ListNode curr = head;
+    int count = 0;
+    while (curr != null && count != k) { 
+        curr = curr.next;
+        count++;
+    }
+    if (count == k) { 
+        curr = reverseKGroup(curr, k); 
+        while (count-- > 0) {  
+            ListNode temp = head.next; 
+            head.next = curr;  
+            curr = head; 
+            head = temp; 
+        }
+        head = curr;
+    }
+    return head;
+        
+    }
+}
+
+
+
