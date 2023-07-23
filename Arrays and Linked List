@@ -284,6 +284,88 @@ output:-
 
 ------------------------------------------------------------------------
 6)
+import java.util.HashSet;
+
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void removeDuplicates() {
+        if (head == null || head.next == null) {
+            return;
+        }
+
+        HashSet<Integer> uniqueNumbers = new HashSet<>();
+        Node current = head;
+        Node prev = null;
+
+        while (current != null) {
+            if (uniqueNumbers.contains(current.data)) {
+                prev.next = current.next;
+            } else {
+                uniqueNumbers.add(current.data);
+                prev = current;
+            }
+            current = current.next;
+        }
+    }
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + "->");
+            current = current.next;
+        }
+    }
+}
+
+public class DuplicatesRemoval{
+    public static void main(String[] args) {
+        LinkedList linkedList = new LinkedList();
+        linkedList.insert(1);
+        linkedList.insert(4);
+        linkedList.insert(9);
+        linkedList.insert(2);
+        linkedList.insert(4);
+        linkedList.insert(4);
+        linkedList.insert(6);
+        linkedList.insert(9);
+        linkedList.insert(2);
+        linkedList.insert(69);
+
+        linkedList.removeDuplicates();
+        linkedList.display();
+    }
+}
+
+output:-
+1->4->9->2->6->69
 
 -------------------------------------------------------------------------
 7)
