@@ -150,10 +150,142 @@ public class Solution {
 
 5)
 
---------------------------------------------------
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+         this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public void merge(LinkedList list1, LinkedList list2) {
+        if (list1.head == null) {
+            this.head = list2.head;
+            return;
+        } else if (list2.head == null) {
+            this.head = list1.head;
+            return;
+        }
+
+        Node current1 = list1.head;
+        Node current2 = list2.head;
+        Node Head = null;
+        Node Tail = null;
+
+        while (current1 != null && current2 != null) {
+            if (current1.data <= current2.data) {
+                if (Head == null) {
+                    Head = current1;
+                    Tail = current1;
+                } else {
+                    Tail.next = current1;
+                    Tail = current1;
+                }
+                current1 = current1.next;
+            } else {
+                if (Head == null) {
+                    Head = current2;
+                    Tail = current2;
+                } else {
+                    Tail.next = current2;
+                    Tail = current2;
+                }
+                current2 = current2.next;
+            }
+        }
+
+         if (current1 != null) {
+              Tail.next = current1;
+         } else if (current2 != null) {
+             Tail.next = current2;
+        }
+
+        this.head = Head;
+    }
+
+    public void sort() {
+        if (head == null || head.next == null) {
+            return;
+        }
+
+        Node current = head;
+        while (current != null) {
+            Node nextNode = current.next;
+            while (nextNode != null) {
+                if (current.data > nextNode.data) {
+                    int temp = current.data;
+                    current.data = nextNode.data;
+                    nextNode.data = temp;
+                }
+                nextNode = nextNode.next;
+            }
+            current = current.next;
+        }
+    }
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + "->");
+            current = current.next;
+        }
+    }
+}
+
+public class Mergeandsort{
+    public static void main(String[] args) {
+        LinkedList list1 = new LinkedList();
+        list1.insert(25);
+        list1.insert(35);
+        list1.insert(12);
+        list1.insert(4);
+        list1.insert(36);
+        list1.insert(48);
+
+        LinkedList list2 = new LinkedList();
+        list2.insert(8);
+        list2.insert(32);
+        list2.insert(22);
+        list2.insert(45);
+        list2.insert(63);
+        list2.insert(49);
+
+        LinkedList mergedList = new LinkedList();
+        mergedList.merge(list1, list2);
+        mergedList.sort();
+        mergedList.display();
+    }
+}
+
+output:-
+4->8->12->22->25->32->35->36->45->48->49->63
+
+------------------------------------------------------------------------
 6)
 
-----------------------------------------------------------------
+-------------------------------------------------------------------------
 7)
 
 class Solution {
