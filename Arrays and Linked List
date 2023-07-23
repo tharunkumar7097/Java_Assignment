@@ -60,6 +60,42 @@ output:-
 
 ----------------------------------------------------------------------
 3)
+package practice;
+import java.util.HashMap;
+import java.util.Arrays;
+
+public class SingularSocks {
+    public static int countSingles(int[] arr) {
+        HashMap<Integer, Integer> socksCount = new HashMap<>();
+        
+        for (int sockId : arr) {
+            socksCount.put(sockId, socksCount.getOrDefault(sockId, 0) + 1);
+        }
+
+        int singularSocksCount = 0;
+        for (int count : socksCount.values()) {
+            if (count == 1) {
+                singularSocksCount++;
+            }
+        }
+
+        return singularSocksCount;
+    }
+
+    public static void main(String[] args) {
+        int[] arrNum = {10, 20, 20, 10, 10, 30, 50, 10, 60};
+
+        System.out.println("arrNum ="+Arrays.toString(arrNum));
+        int singularSocks = countSingles(arrNum);
+        System.out.println("Count of singular socks = " + singularSocks);
+    }
+}
+
+
+output:-
+
+arrNum =[10, 20, 20, 10, 10, 30, 50, 10, 60]
+Count of singular socks = 3
 
 -------------------------------------------------------------------------
 4)
